@@ -49,6 +49,8 @@ function displayAffirmation() {
     displayedMessage.innerText = randomElement(mantras)
   } else if(affirmationRadio.checked) {
     displayedMessage.innerText = randomElement(affirmations)
+  } else {
+    displayedMessage.innerText = 'To not decide is still a decision'
   }
 }
 
