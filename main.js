@@ -19,7 +19,7 @@ var mantras = [
 
 var affirmations = [
   'I forgive myself and set myself free.',
-  'I believe I can be all that I want to be.'
+  'I believe I can be all that I want to be.',
   'I am in the process of becoming the best version of myself.',
   'I have the freedom & power to create the life I desire.',
   'I choose to be kind to myself and love myself unconditionally.',
