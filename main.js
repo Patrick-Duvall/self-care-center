@@ -61,38 +61,42 @@ function displayMessage() {
 
 function displayMantra() {
   mantra = randomElement(remainingMantras)
-  if (remainingMantras.length === affirmations.length) hideSeenAllMessage()
-  remainingMantras = remainingMantras.filter(mant => mant !== mantra)
+  if (remainingMantras.length) seenAllMessage.classList.add('hidden')
+  markMantraAsSeen(mantra)
   displayedMessage.innerText = mantra
   if (!remainingMantras.length) {
-    displayAllSeen('mantras')
+    displayAllSeenMessage('mantras')
     resetMantras()
   }
 }
 
 function displayAffirmation(){
   affirmation = randomElement(remainingAffirmations)
-  if (remainingAffirmations.length === affirmations.length) hideSeenAllMessage()
-  remainingAffirmations = remainingAffirmations.filter(aff => aff !== affirmation)
+  if (remainingAffirmations.length) seenAllMessage.classList.add('hidden')
+  markAffirmationAsSeen(affirmation)
   displayedMessage.innerText = affirmation
   if (!remainingAffirmations.length) {
-    displayAllSeen('affirmations')
+    displayAllSeenMessage('affirmations')
     resetAffirmations()
   }
+}
+
+function displayAllSeenMessage(type) {
+  seenAllMessage.classList.remove('hidden')
+  let otherType = type === 'mantras' ? 'affirmations' : 'mantras';
+  seenAllMessage.innerText = `You have seen all available ${type}, view some ${otherType},\n` +
+  `or continue receiving previously seen ${type}`
 }
 
 function resetAffirmations() { remainingAffirmations = affirmations }
 function resetMantras() { remainingMantras = mantras }
 
-function displayAllSeen(type) {
-  seenAllMessage.classList.remove('hidden')
-  let otherType = type === 'mantras' ? 'affirmations' : 'mantras';
-  seenAllMessage.innerText = `You have seen all available ${type}, view some ${otherType},\n` +
-    `or continue receiving previously seen ${type}`
+function markAffirmationAsSeen(affirmation) {
+  remainingAffirmations = remainingAffirmations.filter(remaining => remaining !== affirmation)
 }
 
-function hideSeenAllMessage() {
-  seenAllMessage.classList.add('hidden')
+function markMantraAsSeen(mantra) {
+  remainingMantras = remainingMantras.filter(remaining => remaining !== mantra)
 }
 
 function randomElement(array) {
