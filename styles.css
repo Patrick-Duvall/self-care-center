@@ -67,3 +67,13 @@ body {
   height: 120px;
   width: 90px;
 }
+
+.displayed-message {
+  text-align: center;
+  padding-top: 67px;
+  padding-bottom: 67px;
+}
+
+.hidden {
+  display: none!important;
+}
