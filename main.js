@@ -37,14 +37,19 @@ var affirmations = [
 var displayedMessage = document.querySelector('.displayed-message')
 var messageButton = document.querySelector('.receive-message')
 var bell = document.querySelector('.bell')
+var mantraRadio = document.querySelector('#mantra-radio')
+var affirmationRadio = document.querySelector('#affirmation-radio')
 
 messageButton.addEventListener('click', displayAffirmation)
 
 function displayAffirmation() {
   bell.classList.add('hidden')
-  displayedMessage.innerText = randomElement(affirmations)
   displayedMessage.classList.remove('hidden')
-
+  if( mantraRadio.checked ) {
+    displayedMessage.innerText = randomElement(mantras)
+  } else if(affirmationRadio.checked) {
+    displayedMessage.innerText = randomElement(affirmations)
+  }
 }
 
 function randomElement(array) {
