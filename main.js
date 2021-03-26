@@ -1,7 +1,7 @@
 
 var mantras = [
-  'Breathing in, I send myself love.Breathing out, I send love to someone else who needs it.'
-  // 'Don’t let yesterday take up too much of today.',
+  'Breathing in, I send myself love.Breathing out, I send love to someone else who needs it.',
+  'Don’t let yesterday take up too much of today.',
   // 'Every day is a second chance.',
   // 'Tell the truth and love everyone.',
   // 'I am free from sadness.',
@@ -34,6 +34,7 @@ var affirmations = [
 ]
 
 var remainingAffirmations = affirmations
+var remainingMantras = mantras
 
 
 var displayedMessage = document.querySelector('.displayed-message')
@@ -50,28 +51,49 @@ function displayMessage() {
   bell.classList.add('hidden')
   displayedMessage.classList.remove('hidden')
   if( mantraRadio.checked ) {
-    displayedMessage.innerText = randomElement(mantras)
+    displayMantra()
   } else if(affirmationRadio.checked) {
-    affirmation = randomElement(remainingAffirmations)
-    if (remainingAffirmations.length === affirmations.length){
-      messageDelivery.setAttribute('class', 'message-delivery')
-      seenAllMessage.classList.add('hidden')
-    }
-    remainingAffirmations = remainingAffirmations.filter(aff => aff !== affirmation )
-    displayedMessage.innerText = affirmation
-    if(!remainingAffirmations.length){
-      seenAllMessage.classList.remove('hidden')
-      seenAllMessage.innerText= 'You have seen all available affirmations, view some mantras, ' +
-      'or continue receiving previously seen affirmations'
-      messageDelivery.setAttribute('class', 'message-delivery-seen')
-      remainingAffirmations = affirmations
-    }
+    displayAffirmation()
   } else {
     displayedMessage.innerText = 'To not decide is still a decision'
   }
 }
 
-function 
+function displayMantra() {
+  mantra = randomElement(remainingMantras)
+  if (remainingMantras.length === affirmations.length) hideSeenAllMessage()
+  remainingMantras = remainingMantras.filter(mant => mant !== mantra)
+  displayedMessage.innerText = mantra
+  if (!remainingMantras.length) {
+    displayAllSeen('mantras')
+    resetMantras()
+  }
+}
+
+function displayAffirmation(){
+  affirmation = randomElement(remainingAffirmations)
+  if (remainingAffirmations.length === affirmations.length) hideSeenAllMessage()
+  remainingAffirmations = remainingAffirmations.filter(aff => aff !== affirmation)
+  displayedMessage.innerText = affirmation
+  if (!remainingAffirmations.length) {
+    displayAllSeen('affirmations')
+    resetAffirmations()
+  }
+}
+
+function resetAffirmations() { remainingAffirmations = affirmations }
+function resetMantras() { remainingMantras = mantras }
+
+function displayAllSeen(type) {
+  seenAllMessage.classList.remove('hidden')
+  let otherType = type === 'mantras' ? 'affirmations' : 'mantras';
+  seenAllMessage.innerText = `You have seen all available ${type}, view some ${otherType},\n` +
+    `or continue receiving previously seen ${type}`
+}
+
+function hideSeenAllMessage() {
+  seenAllMessage.classList.add('hidden')
+}
 
 function randomElement(array) {
   return array[Math.floor(Math.random() * array.length)]
