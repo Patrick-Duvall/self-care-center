@@ -35,28 +35,63 @@ var affirmations = [
 
 var remainingAffirmations = affirmations
 var remainingMantras = mantras
+var favoriteMessages = []
+var messageDisplayGrid = document.querySelector('.message-display-grid')
 
 
 var displayedMessage = document.querySelector('.displayed-message')
 var seenAllMessage = document.querySelector('.seen-all-message')
 var messageButton = document.querySelector('.receive-message')
+var messageAndButton = document.querySelector('.message-and-button')
+var favoriteButton = document.querySelector('.favorite-button')
+var showFavoritesButton = document.querySelector('.show-favorites')
+var backButton = document.querySelector('.back-to-main')
 var bell = document.querySelector('.bell')
 var mantraRadio = document.querySelector('#mantra-radio')
 var affirmationRadio = document.querySelector('#affirmation-radio')
 var messageDelivery = document.querySelector('.message-delivery')
 
+var mainPage = document.querySelector('.main-page')
+var favoritesIndex = document.querySelector('.favorites-index')
+
 messageButton.addEventListener('click', displayMessage)
+favoriteButton.addEventListener('click', favoriteMessage)
+showFavoritesButton.addEventListener('click', showFavoritesPage)
+backButton.addEventListener('click', showMainPage)
+
+function favoriteMessage() {
+  favoriteMessages.push(displayedMessage.innerText)
+  favoriteButton.classList.add('hidden')
+}
+
+function showFavoritesPage() {
+  mainPage.classList.add('hidden')
+  addFavoriteMessages()
+  favoritesIndex.classList.remove('hidden')
+}
+
+function showMainPage() {
+  mainPage.classList.remove('hidden')
+  favoritesIndex.classList.add('hidden')
+}
 
 function displayMessage() {
   bell.classList.add('hidden')
   displayedMessage.classList.remove('hidden')
   if( mantraRadio.checked ) {
+    showFavoriteButtons()
     displayMantra()
   } else if(affirmationRadio.checked) {
+    showFavoriteButtons()
     displayAffirmation()
   } else {
     displayedMessage.innerText = 'To not decide is still a decision'
   }
+}
+
+function showFavoriteButtons() {
+  showFavoritesButton.classList.remove('hidden')
+  favoriteButton.classList.remove('hidden')
 }
 
 function displayMantra() {
@@ -97,6 +132,18 @@ function markAffirmationAsSeen(affirmation) {
 
 function markMantraAsSeen(mantra) {
   remainingMantras = remainingMantras.filter(remaining => remaining !== mantra)
+}
+
+function addFavoriteMessages() {
+  html = ''
+  for(let i = 0; i < favoriteMessages.length; i++){
+    html += `
+    <div class="favorited-message">
+      <p>${favoriteMessages[i]}</p>
+      </div>
+    `
+  }
+  messageDisplayGrid.innerHTML = html
 }
 
 function randomElement(array) {

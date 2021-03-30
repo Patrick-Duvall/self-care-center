@@ -9,32 +9,43 @@
 <body>
   <div class="gradient">
     <h1 class="main-title">✨ Self Care Center ✨</h1>
-    <h3 class="sub-title">Which type of message? </h3>
-    <div class="message-selector">
-      <table class="radio-buttons">
-        <tr>
-          <td>
-            <input type="radio" name="affirmation-type" id="affirmation-radio" />
-          </td>
-          <td>
-            <label for="affirmation-radio">affirmation</label>
-          </td>
-          <td class="spacer"></td>
-          <td>
-            <input type="radio" name="affirmation-type" id="mantra-radio" />
-          </td>
-          <td>
-            <label for="mantra-radio">mantra</label>
-          </td>
-        </tr>
-      </table>
-      <button class="receive-message">Recieve Message</button>
+    <div class="main-page">
+      <h3 class="sub-title">Which type of message? </h3>
+
+      <div class="message-selector">
+        <table class="radio-buttons">
+          <tr>
+            <td>
+              <input type="radio" name="affirmation-type" id="affirmation-radio" />
+            </td>
+            <td>
+              <label for="affirmation-radio">affirmation</label>
+            </td>
+            <td class="spacer"></td>
+            <td>
+              <input type="radio" name="affirmation-type" id="mantra-radio" />
+            </td>
+            <td>
+              <label for="mantra-radio">mantra</label>
+            </td>
+          </tr>
+        </table>
+        <button class="receive-message">Recieve Message</button>
+      </div>
+
+      <div class="message-delivery">
+        <img class="bell" src="assets/meditate.svg" alt="a bell">
+          <p class="displayed-message hidden"></p>
+          <button class="favorite-button hidden">❤️❤️❤️</button>
+        <p class="seen-all-message hidden"></p>
+      </div>
+
+      <button class="show-favorites hidden">Show ❤️❤️❤️ messages</button>
     </div>
 
-    <div class="message-delivery">
-      <img class="bell" src="assets/meditate.svg" alt="a bell">
-      <p class="displayed-message hidden"></p>
-      <p class="seen-all-message hidden"></p>
+    <div class="favorites-index hidden">
+      <div class="message-display-grid"></div>
+      <button class="back-to-main">Back to main page</button>
     </div>
 
   </div>
