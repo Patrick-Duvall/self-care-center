@@ -40,13 +40,31 @@ body {
 }
 
 .spacer {
-  width: 50%;
+  width: 30%;
 }
 
 .receive-message {
   background-color: #134d71;
   color: white;
   margin: 20px auto;
+  padding: 10px 40px;
+  border-radius: 5px;
+  display: block;
+}
+
+.favorite-button {
+  background-color: #134d71;
+  color: white;
+  margin: 0 auto 10px auto;
+  padding: 10px 40px;
+  border-radius: 5px;
+  display: block;
+}
+
+.show-favorites {
+  background-color: #134d71;
+  color: white;
+  margin: 0 auto 10px auto;
   padding: 10px 40px;
   border-radius: 5px;
   display: block;

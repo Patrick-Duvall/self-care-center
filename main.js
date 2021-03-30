@@ -35,24 +35,53 @@ var affirmations = [
 
 var remainingAffirmations = affirmations
 var remainingMantras = mantras
+var favoriteMessages = []
 
 
 var displayedMessage = document.querySelector('.displayed-message')
 var seenAllMessage = document.querySelector('.seen-all-message')
 var messageButton = document.querySelector('.receive-message')
+var messageAndButton = document.querySelector('.message-and-button')
+var favoriteButton = document.querySelector('.favorite-button')
+var showFavoritesButton = document.querySelector('.show-favorites')
+var backButton = document.querySelector('.back-to-main')
 var bell = document.querySelector('.bell')
 var mantraRadio = document.querySelector('#mantra-radio')
 var affirmationRadio = document.querySelector('#affirmation-radio')
 var messageDelivery = document.querySelector('.message-delivery')
 
+var mainPage = document.querySelector('.main-page')
+var favoritesIndex = document.querySelector('.favorites-index')
+
 messageButton.addEventListener('click', displayMessage)
+favoriteButton.addEventListener('click', favoriteMessage)
+showFavoritesButton.addEventListener('click', showFavoritesPage)
+backButton.addEventListener('click', showMainPage)
+
+function favoriteMessage() {
+  favoriteMessages.push(displayedMessage.innerText)
+  favoriteButton.classList.add('hidden')
+}
+
+function showFavoritesPage() {
+  mainPage.classList.add('hidden')
+  favoritesIndex.classList.remove('hidden')
+}
+
+function showMainPage() {
+  mainPage.classList.remove('hidden')
+  favoritesIndex.classList.add('hidden')
+}
 
 function displayMessage() {
   bell.classList.add('hidden')
   displayedMessage.classList.remove('hidden')
+  showFavoritesButton.classList.remove('hidden')
   if( mantraRadio.checked ) {
+    favoriteButton.classList.remove('hidden')
     displayMantra()
   } else if(affirmationRadio.checked) {
+    favoriteButton.classList.remove('hidden')
     displayAffirmation()
   } else {
     displayedMessage.innerText = 'To not decide is still a decision'
