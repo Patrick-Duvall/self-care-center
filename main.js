@@ -163,7 +163,9 @@ function addDeleteButtons() {
 }
 
 function deleteMessage(messageId) {
+  message = favoriteMessages.find(message => message.id === messageId)
   favoriteMessages = favoriteMessages.filter(message => message.id !== messageId)
+  if(message.message === displayedMessage.innerText) favoriteButton.classList.remove('hidden')
 }
 
 function randomElement(array) {
