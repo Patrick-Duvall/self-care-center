@@ -36,24 +36,28 @@ var affirmations = [
 var remainingAffirmations = affirmations
 var remainingMantras = mantras
 var favoriteMessages = []
-var messageDisplayGrid = document.querySelector('.message-display-grid')
 
-
+// Page components
 var displayedMessage = document.querySelector('.displayed-message')
 var seenAllMessage = document.querySelector('.seen-all-message')
+var bell = document.querySelector('.bell')
+var messageDelivery = document.querySelector('.message-delivery')
+var messageDisplayGrid = document.querySelector('.message-display-grid')
+
+// Buttons
 var messageButton = document.querySelector('.receive-message')
 var messageAndButton = document.querySelector('.message-and-button')
 var favoriteButton = document.querySelector('.favorite-button')
 var showFavoritesButton = document.querySelector('.show-favorites')
 var backButton = document.querySelector('.back-to-main')
-var bell = document.querySelector('.bell')
 var mantraRadio = document.querySelector('#mantra-radio')
 var affirmationRadio = document.querySelector('#affirmation-radio')
-var messageDelivery = document.querySelector('.message-delivery')
 
+// Pages
 var mainPage = document.querySelector('.main-page')
 var favoritesIndex = document.querySelector('.favorites-index')
 
+// Event Listeners
 messageButton.addEventListener('click', displayMessage)
 favoriteButton.addEventListener('click', favoriteMessage)
 showFavoritesButton.addEventListener('click', showFavoritesPage)
@@ -68,7 +72,7 @@ function favoriteMessage() {
 
 function showFavoritesPage() {
   mainPage.classList.add('hidden')
-  addFavoriteMessages()
+  renderFavoriteMessages()
   favoritesIndex.classList.remove('hidden')
 }
 
@@ -136,7 +140,7 @@ function markMantraAsSeen(mantra) {
   remainingMantras = remainingMantras.filter(remaining => remaining !== mantra)
 }
 
-function addFavoriteMessages() {
+function renderFavoriteMessages() {
   html = ''
   for(let i = 0; i < favoriteMessages.length; i++){
     message = favoriteMessages[i]
@@ -157,7 +161,7 @@ function addDeleteButtons() {
   for (let i = 0; i < deleteButtons.length; i++) {
     deleteButtons[i].addEventListener('click', function () {
       deleteMessage(favoriteMessages[i].id)
-      addFavoriteMessages()
+      renderFavoriteMessages()
     })
   }
 }
