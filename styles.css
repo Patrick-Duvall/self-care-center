@@ -43,39 +43,30 @@ body {
   width: 30%;
 }
 
-.receive-message {
+button {
   background-color: #134d71;
   color: white;
-  margin: 20px auto;
   padding: 10px 40px;
   border-radius: 5px;
+}
+
+.receive-message {
+  margin: 20px auto;
   display: block;
 }
 
 .favorite-button {
-  background-color: #134d71;
-  color: white;
-  margin: 0 auto 10px auto;
-  padding: 10px 40px;
-  border-radius: 5px;
-  /* display: block; */
+  margin: 0 auto 20px auto;
+  display: block;
 }
 
 .show-favorites {
-  background-color: #134d71;
-  color: white;
   margin: 20px auto 10px auto;
-  padding: 10px 40px;
-  border-radius: 5px;
   display: block;
 }
 
 .back-to-main {
-  background-color: #134d71;
-  color: white;
   margin: 0 auto 10px auto;
-  padding: 10px 40px;
-  border-radius: 5px;
   display: block;
 }
 
@@ -84,6 +75,7 @@ body {
   margin: 0 auto;
   border-radius: 10px;
   width: 70%;
+  overflow: hidden;
 }
 
 .bell {
