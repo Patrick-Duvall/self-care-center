@@ -60,7 +60,9 @@ showFavoritesButton.addEventListener('click', showFavoritesPage)
 backButton.addEventListener('click', showMainPage)
 
 function favoriteMessage() {
-  favoriteMessages.push(displayedMessage.innerText)
+  messageType = document.querySelector("#mantra-radio").checked === true ? "Mantra" : "Affirmation"
+  message = new Message(displayedMessage.innerText, messageType) 
+  favoriteMessages.push(message)
   favoriteButton.classList.add('hidden')
 }
 
@@ -137,13 +139,31 @@ function markMantraAsSeen(mantra) {
 function addFavoriteMessages() {
   html = ''
   for(let i = 0; i < favoriteMessages.length; i++){
+    message = favoriteMessages[i]
     html += `
-    <div class="favorited-message">
-      <p>${favoriteMessages[i]}</p>
+    <div class="favorited-message ${message.type}" id="${message.id}">
+      <h3>${message.type}</h3>
+      <p>${favoriteMessages[i].message}</p>
+      <button class="delete">🗑️</button>
       </div>
     `
   }
   messageDisplayGrid.innerHTML = html
+  addDeleteButtons()
+}
+
+function addDeleteButtons() {
+  deleteButtons = document.querySelectorAll(".delete")
+  for (let i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener('click', function () {
+      deleteMessage(favoriteMessages[i].id)
+      addFavoriteMessages()
+    })
+  }
+}
+
+function deleteMessage(messageId) {
+  favoriteMessages = favoriteMessages.filter(message => message.id !== messageId)
 }
 
 function randomElement(array) {
