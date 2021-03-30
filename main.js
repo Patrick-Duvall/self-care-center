@@ -36,37 +36,43 @@ var affirmations = [
 var remainingAffirmations = affirmations
 var remainingMantras = mantras
 var favoriteMessages = []
-var messageDisplayGrid = document.querySelector('.message-display-grid')
 
-
+// Page components
 var displayedMessage = document.querySelector('.displayed-message')
 var seenAllMessage = document.querySelector('.seen-all-message')
+var bell = document.querySelector('.bell')
+var messageDelivery = document.querySelector('.message-delivery')
+var messageDisplayGrid = document.querySelector('.message-display-grid')
+
+// Buttons
 var messageButton = document.querySelector('.receive-message')
 var messageAndButton = document.querySelector('.message-and-button')
 var favoriteButton = document.querySelector('.favorite-button')
 var showFavoritesButton = document.querySelector('.show-favorites')
 var backButton = document.querySelector('.back-to-main')
-var bell = document.querySelector('.bell')
 var mantraRadio = document.querySelector('#mantra-radio')
 var affirmationRadio = document.querySelector('#affirmation-radio')
-var messageDelivery = document.querySelector('.message-delivery')
 
+// Pages
 var mainPage = document.querySelector('.main-page')
 var favoritesIndex = document.querySelector('.favorites-index')
 
+// Event Listeners
 messageButton.addEventListener('click', displayMessage)
 favoriteButton.addEventListener('click', favoriteMessage)
 showFavoritesButton.addEventListener('click', showFavoritesPage)
 backButton.addEventListener('click', showMainPage)
 
 function favoriteMessage() {
-  favoriteMessages.push(displayedMessage.innerText)
+  messageType = document.querySelector("#mantra-radio").checked === true ? "Mantra" : "Affirmation"
+  message = new Message(displayedMessage.innerText, messageType) 
+  favoriteMessages.push(message)
   favoriteButton.classList.add('hidden')
 }
 
 function showFavoritesPage() {
   mainPage.classList.add('hidden')
-  addFavoriteMessages()
+  renderFavoriteMessages()
   favoritesIndex.classList.remove('hidden')
 }
 
@@ -134,16 +140,36 @@ function markMantraAsSeen(mantra) {
   remainingMantras = remainingMantras.filter(remaining => remaining !== mantra)
 }
 
-function addFavoriteMessages() {
+function renderFavoriteMessages() {
   html = ''
   for(let i = 0; i < favoriteMessages.length; i++){
+    message = favoriteMessages[i]
     html += `
-    <div class="favorited-message">
-      <p>${favoriteMessages[i]}</p>
+    <div class="favorited-message ${message.type}" id="${message.id}">
+      <h3>${message.type}</h3>
+      <p>${favoriteMessages[i].message}</p>
+      <button class="delete">🗑️</button>
       </div>
     `
   }
   messageDisplayGrid.innerHTML = html
+  addDeleteButtons()
+}
+
+function addDeleteButtons() {
+  deleteButtons = document.querySelectorAll(".delete")
+  for (let i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener('click', function () {
+      deleteMessage(favoriteMessages[i].id)
+      renderFavoriteMessages()
+    })
+  }
+}
+
+function deleteMessage(messageId) {
+  message = favoriteMessages.find(message => message.id === messageId)
+  favoriteMessages = favoriteMessages.filter(message => message.id !== messageId)
+  if(message.message === displayedMessage.innerText) favoriteButton.classList.remove('hidden')
 }
 
 function randomElement(array) {
