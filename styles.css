@@ -58,10 +58,19 @@ body {
   margin: 0 auto 10px auto;
   padding: 10px 40px;
   border-radius: 5px;
-  display: block;
+  /* display: block; */
 }
 
 .show-favorites {
+  background-color: #134d71;
+  color: white;
+  margin: 20px auto 10px auto;
+  padding: 10px 40px;
+  border-radius: 5px;
+  display: block;
+}
+
+.back-to-main {
   background-color: #134d71;
   color: white;
   margin: 0 auto 10px auto;
@@ -97,6 +106,20 @@ body {
   padding: 0 0 20px 0 ;
   margin: 0 10px;
   font-style: italic;
+}
+
+.message-display-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.favorited-message {
+  color: #134d71;
+  background-color: white; 
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .hidden {

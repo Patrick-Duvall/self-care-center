@@ -36,6 +36,7 @@ var affirmations = [
 var remainingAffirmations = affirmations
 var remainingMantras = mantras
 var favoriteMessages = []
+var messageDisplayGrid = document.querySelector('.message-display-grid')
 
 
 var displayedMessage = document.querySelector('.displayed-message')
@@ -65,6 +66,7 @@ function favoriteMessage() {
 
 function showFavoritesPage() {
   mainPage.classList.add('hidden')
+  addFavoriteMessages()
   favoritesIndex.classList.remove('hidden')
 }
 
@@ -76,16 +78,20 @@ function showMainPage() {
 function displayMessage() {
   bell.classList.add('hidden')
   displayedMessage.classList.remove('hidden')
-  showFavoritesButton.classList.remove('hidden')
   if( mantraRadio.checked ) {
-    favoriteButton.classList.remove('hidden')
+    showFavoriteButtons()
     displayMantra()
   } else if(affirmationRadio.checked) {
-    favoriteButton.classList.remove('hidden')
+    showFavoriteButtons()
     displayAffirmation()
   } else {
     displayedMessage.innerText = 'To not decide is still a decision'
   }
+}
+
+function showFavoriteButtons() {
+  showFavoritesButton.classList.remove('hidden')
+  favoriteButton.classList.remove('hidden')
 }
 
 function displayMantra() {
@@ -126,6 +132,18 @@ function markAffirmationAsSeen(affirmation) {
 
 function markMantraAsSeen(mantra) {
   remainingMantras = remainingMantras.filter(remaining => remaining !== mantra)
+}
+
+function addFavoriteMessages() {
+  html = ''
+  for(let i = 0; i < favoriteMessages.length; i++){
+    html += `
+    <div class="favorited-message">
+      <p>${favoriteMessages[i]}</p>
+      </div>
+    `
+  }
+  messageDisplayGrid.innerHTML = html
 }
 
 function randomElement(array) {
